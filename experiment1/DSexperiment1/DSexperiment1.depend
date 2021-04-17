@@ -1,0 +1,23 @@
+# depslib dependency file v1.0
+1617179764 source:e:\experiment\dsexperiment1\main.c
+	"Function.h"
+	"Robust.h"
+
+1617175091 source:e:\experiment\dsexperiment1\function.c
+	"Function.h"
+
+1617179541 e:\experiment\dsexperiment1\function.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1617179541 e:\experiment\dsexperiment1\robust.h
+	<stdio.h>
+	<stdlib.h>
+
+1617179652 source:e:\experiment\dsexperiment1\robust.c
+	<stdio.h>
+	<stdlib.h>
+	"Robust.h"
+

@@ -1,0 +1,13 @@
+# depslib dependency file v1.0
+1617108021 source:e:\学校各种文件\作业\数据结构\2021数据结构lab\实验1\lab1_stu\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+
+1617125082 source:e:\experiment\lab1_stu\main.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+

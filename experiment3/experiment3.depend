@@ -1,0 +1,20 @@
+# depslib dependency file v1.0
+1618614633 source:e:\experiment\experiment3\main.cpp
+	<iostream>
+	"BinaryTree.h"
+	<fstream>
+
+1618597479 source:e:\experiment\experiment3\binarytree.cpp
+	<iostream>
+	<cstring>
+	<sstream>
+	<stdlib.h>
+	<fstream>
+	"BinaryTree.h"
+
+1618614633 e:\experiment\experiment3\binarytree.h
+	<iostream>
+	<cstring>
+	<sstream>
+	<fstream>
+
