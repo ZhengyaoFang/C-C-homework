@@ -1,5 +1,6 @@
 #include <iostream>
 #include "GraphClass.h"
+#include<string.h>
 using namespace std;
 //类成员函数定义
 /*
@@ -18,6 +19,55 @@ Mgraph::Mgraph(int theVexnum,int theArcnum)
 }
 */
 
+
+//question1适用的构造函数
+Mgraph::Mgraph(int theVexnum,int theArcnum)
+{
+    this->vexnum=theVexnum;
+    this->arcnum=theArcnum;
+    Diamester=0;
+    Radius=0;
+    ClusCoefficient=0;
+    ConnectedComponent=0;
+
+
+
+    //初始化结点和边
+    for(int i=0;i<vexnum;i++)
+        this->vertices[i].val=i;  //初始化顶点权值代为其编号
+
+}
+
+//适用question2的构造函数
+Mgraph::Mgraph(int theVexnum)
+{
+    this->vexnum=theVexnum;
+    this->arcnum=0;
+    Diamester=0;
+    Radius=0;
+    ClusCoefficient=0;
+    ConnectedComponent=0;
+}
+
+
+//添加点
+void Mgraph::AddNode(int start_idx,int end_idx,int weight,int road)
+{
+    AdjMatrix[start_idx][end_idx].val = weight;
+    AdjMatrix[end_idx][start_idx].val = weight;
+    AdjMatrix[start_idx][end_idx].exist=true;
+    AdjMatrix[end_idx][start_idx].exist=true;
+    vertices[start_idx].degree++;
+    vertices[end_idx].degree++;
+    vertices[start_idx].Road.push_back(road);
+    //vertices[end_idx].Road.push_back(road);
+    vertices[start_idx].val=start_idx;
+    vertices[end_idx].val=end_idx;
+    if(vertices[start_idx].degree>vertices[MaxConnectedStation].degree)
+        MaxConnectedStation=start_idx;
+    if(vertices[end_idx].degree>vertices[MaxConnectedStation].degree)
+        MaxConnectedStation=end_idx;
+}
 //获得每个顶点的聚类系数和无向图的聚类系数
 void Mgraph::GetClusCoefficient()
 {
@@ -77,7 +127,7 @@ void Mgraph::GetConnectedComponent()
 }
 
 //Dijkstra获取单源最短路径
-void Mgraph::Dijkstra(int n1,int n2)
+int Mgraph::Dijkstra(int n1,int n2,int P[])
 {
     if(n1==n2)
     {
@@ -85,7 +135,7 @@ void Mgraph::Dijkstra(int n1,int n2)
     }
     else if(ConnectedComponent!=1)//若图不连通
     {
-        cerr<<"Error!The Graph is not connected!!"<<endl;
+        //cerr<<"Error!The Graph is not connected!!"<<endl;     //为了符合输出要求，错误提示不输出
     }
     else if(n1>vexnum-1&&n2>vexnum-1)
     {
@@ -94,7 +144,7 @@ void Mgraph::Dijkstra(int n1,int n2)
     else
     {
         //Dijkstra算法
-        int D[MAX_VER_NUM],P[MAX_VER_NUM];
+        int D[MAX_VER_NUM];
         bool S[MAX_VER_NUM];//是否在已确定最短路径的集合中
 
         //初始化
@@ -127,16 +177,34 @@ void Mgraph::Dijkstra(int n1,int n2)
                     }
             }
         }
-        cout<<"the shortest path between "<<n1<<" and "<<n2<<":"<<D[n2]<<endl;
 
-        cout<<"Path:";
-        PutOutWay(P,n1,n2);
-        cout<<endl;
-
+        return D[n2];
 
     }
+    return -1;
 }
 
+void Mgraph::Dijkstra(int node1,int node2)
+{
+    int distance,P[MAX_VER_NUM];
+    distance=Dijkstra(node1,node2,P);
+
+    cout<<"the shortest path between "<<node1<<" and "<<node2<<":"<<distance<<endl;
+
+    cout<<"Path:";
+    PutOutWay(P,node1,node2);
+    cout<<endl;
+}
+
+void Mgraph::FindWay(string s1,string s2)
+{
+    int node1,node2;
+    node1=FindNodeNum(s1);
+    node2=FindNodeNum(s2);
+    int P[MAX_VER_NUM];
+    int distance;
+    distance=Dijkstra(node1,node2,P);
+}
 //深度遍历
 void Mgraph::DFS(int v,bool visited[])
 {
@@ -229,3 +297,9 @@ void Mgraph::GetData(int &node1,int &node2,int &theVal)
     cin>>theVal;
 }
 
+int Mgraph::FindNodeNum(string s)
+{
+    int i;
+    while(s!=vertices[i++].name);
+    return i;
+}
