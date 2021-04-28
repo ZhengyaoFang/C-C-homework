@@ -42,8 +42,9 @@ void Mgraph::GetClusCoefficient()
                     }
                 }
             }
+            vertices[i].NodeClusCoefficient=((double)existArc)/AllArc;
         }//else
-        vertices[i].NodeClusCoefficient=((double)existArc)/AllArc;
+
         sum+=vertices[i].NodeClusCoefficient;
     }
     ClusCoefficient=sum/vexnum;

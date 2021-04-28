@@ -84,7 +84,7 @@ public:
     void Init()
     {
         GetConnectedComponent();
-        //GetClusCoefficient();
+        GetClusCoefficient();
         GetFloyedMatrix();
         GetDiamesterAndRadius();
     }
