@@ -200,10 +200,13 @@ void Mgraph::FindWay(string s1,string s2)
 {
     int node1,node2;
     node1=FindNodeNum(s1);
+    cout<<node1<<endl;
     node2=FindNodeNum(s2);
     int P[MAX_VER_NUM];
     int distance;
     distance=Dijkstra(node1,node2,P);
+    cout<<"需要最少时间："<<distance<<endl;
+    PutOutStation(P,node1,node2);
 }
 //深度遍历
 void Mgraph::DFS(int v,bool visited[])
@@ -288,7 +291,16 @@ void Mgraph::PutOutWay(int P[],int v,int u)
     PutOutWay(P,v,P[u]);
     printf("%d ",u);
 }
-
+void Mgraph::PutOutStation(int P[],int v,int u)
+{
+    if(v==u)
+    {
+        cout<<vertices[u].name;
+        return;
+    }
+    PutOutStation(P,v,P[u]);
+    cout<<"<=="<<vertices[u].name;
+}
 //暂时这样子，后面再改
 void Mgraph::GetData(int &node1,int &node2,int &theVal)
 {
@@ -300,6 +312,6 @@ void Mgraph::GetData(int &node1,int &node2,int &theVal)
 int Mgraph::FindNodeNum(string s)
 {
     int i;
-    while(s!=vertices[i++].name);
-    return i;
+    while(!(s==vertices[i++].name));
+    return --i;
 }

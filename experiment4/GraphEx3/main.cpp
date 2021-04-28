@@ -152,6 +152,12 @@ int main() {
         cout<<SubMap->ConnectedComponent<<endl;
         cout<<SubMap->MaxConnectedStation<<endl;
         cout<<SubMap->vertices[200].Road.size()<<endl;
+        string s1="大学城";
+        string s2="世界之窗";
+        SubMap->FindWay(s1,s2);
+
+        cout<<SubMap->Diamester<<endl;
+        cout<<SubMap->Radius<<endl;
 
 
 

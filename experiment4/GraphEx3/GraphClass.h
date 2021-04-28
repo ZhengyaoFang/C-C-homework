@@ -99,6 +99,7 @@ private:
     void GetDiamesterAndRadius();
     //辅助函数
     void PutOutWay(int P[],int v,int u);
+    void PutOutStation(int P[],int v,int u);
     void GetData(int &node1,int &node2,int &theVal);//输入合法性检测
 
 
