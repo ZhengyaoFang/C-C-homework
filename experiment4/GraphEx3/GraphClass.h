@@ -4,6 +4,7 @@
 #include<locale>
 #include <iostream>
 #include <vector>
+#include<fstream>
 
 #define MAX_DIS 100000
 #define MAX_VER_NUM 1000
@@ -11,6 +12,10 @@
 #include <string>
 #define MAX_NAME 100
 
+
+bool GetData(std::fstream &fp,int &num1,int &num2);
+bool GetData(std::fstream &fp,int &node1,int &node2,int &theVal);//输入合法性检测
+bool GetOneData(std::fstream &fp,int &num);
 
 
 //顶点结构体
@@ -100,7 +105,8 @@ private:
     //辅助函数
     void PutOutWay(int P[],int v,int u);
     void PutOutStation(int P[],int v,int u);
-    void GetData(int &node1,int &node2,int &theVal);//输入合法性检测
+
+
 
 
 };

@@ -5,7 +5,7 @@
 
 #include<fstream>
 #include "GraphClass.h"
-#define READ_TEST_FILE 0
+#define READ_TEST_FILE 1
 #define TEST_2 1
 
 using namespace std;
@@ -20,16 +20,19 @@ int main() {
         int node_num;
         int edge_num;
         int ca = 1;
-        if (freopen("stu.in", "r", stdin) == NULL) {
-            printf("There is an error in reading file stu.in");
+        fstream fp("stu.in");
+
+        if (!fp.is_open()) {
+            printf("There is an error in reading file stu.in£¡\n");
+            return -1;
         }
 
+        while (GetData(fp,node_num,edge_num) != false) {
 
 
-        while (scanf("%d %d\n", &node_num, &edge_num) != EOF) {
+            cout<<endl;
+            cout<<"case "<<ca++<<":"<<endl;
 
-
-            printf("\ncase %d:\n", ca++);
 
             int start_idx, end_idx, weight;
 
@@ -45,29 +48,31 @@ int main() {
             */
 
             for (int i = 0; i < edge_num; i++) {
-                scanf("%d %d %d\n", &start_idx, &end_idx, &weight);
-                g->AdjMatrix[start_idx][end_idx].val = weight;
-                g->AdjMatrix[end_idx][start_idx].val = weight;
-                g->AdjMatrix[start_idx][end_idx].exist=true;
-                g->AdjMatrix[end_idx][start_idx].exist=true;
-                g->vertices[start_idx].degree++;
-                g->vertices[end_idx].degree++;
+                GetData(fp,start_idx,end_idx,weight);
+                g->AddNode(start_idx,end_idx,weight,0);
             }
             g->Init();
 
-            printf("connected: %d\n", g->ConnectedComponent==1);
+            cout<<"connected:" <<(g->ConnectedComponent==1)<<endl;
+            //printf("connected: %d\n", g->ConnectedComponent==1);
 
             //int *degree = (int *)malloc(sizeof(int) * g.N);
             //nodeDegree(g, degree);
-            printf("degree distribution:\n");
+            cout<<"degree distribution:"<<endl;
+            //printf("degree distribution:\n");
+
             for(int i=0; i<g->vexnum; i++)
             {
-                printf("node%d:%d,", g->vertices[i].val, g->vertices[i].degree);
+                cout<<"node"<<g->vertices[i].val<<":"<<g->vertices[i].degree<<",";
+                //printf("node%d:%d,", g->vertices[i].val, g->vertices[i].degree);
             }
-            printf("\n");
+            cout<<endl;
+            //printf("\n");
             //free(degree);
 
             double c = g->ClusCoefficient;
+
+            //cout<<"clustering coefficient:"<<c<<endl;
             printf("clustering coefficient:%f\n", c);
 
             if(g->ConnectedComponent==1)
@@ -84,11 +89,15 @@ int main() {
                 int diameter, radius;
                 diameter=g->Diamester;
                 radius=g->Radius;
-                printf("diameter:%d\n", diameter);
-                printf("radius:%d\n", radius);
+
+                cout<<"diamester:"<<diameter<<endl;
+                //printf("diameter:%d\n", diameter);
+                cout<<"radius:"<<radius<<endl;
+                //printf("radius:%d\n", radius);
             }
             delete g;
         }
+        fp.close();
     }//²âÊÔÓÃÀý²¿·Ö
     else if(TEST_2)
     {
@@ -109,12 +118,15 @@ int main() {
         for(int road=0;road<roadnum;road++)
         {
             int RoadVexnum;
-            fp>>RoadVexnum;
+            GetOneData(fp,RoadVexnum);
+            //fp>>RoadVexnum;
             int Station,D,preStation;
             for(int k=0;k<RoadVexnum;k++)
             {
-                fp>>Station;
-                fp>>D;
+                GetOneData(fp,Station);
+                GetOneData(fp,D);
+                //fp>>Station;
+                //fp>>D;
                 if(D==0)
                 {
                     preStation=Station;
@@ -129,6 +141,7 @@ int main() {
             }
         }
         fp.close();
+
         fstream fp2("no2metro.txt");
         if(!fp2.is_open())
         {
@@ -136,11 +149,14 @@ int main() {
             return -1;
         }
         int StationNum;
-        fp2>>StationNum;
+        GetOneData(fp2,StationNum);
+        //fp2>>StationNum;
         for(int i=0;i<StationNum;i++)
         {
             int num;
-            fp2>>num;
+
+            GetOneData(fp2,num);
+            //fp2>>num;
             fp2>>SubMap->vertices[num].name;
         }
         fp2.close();

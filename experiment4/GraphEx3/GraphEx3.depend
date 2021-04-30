@@ -1,16 +1,17 @@
 # depslib dependency file v1.0
-1619610783 source:e:\experiment\experiment4\graphex3\graphclass.cpp
+1619796379 source:e:\experiment\experiment4\graphex3\graphclass.cpp
 	<iostream>
 	"GraphClass.h"
 	<string.h>
 
-1619609725 e:\experiment\experiment4\graphex3\graphclass.h
+1619796225 e:\experiment\experiment4\graphex3\graphclass.h
 	<locale>
 	<iostream>
 	<vector>
+	<fstream>
 	<string>
 
-1619610918 source:e:\experiment\experiment4\graphex3\main.cpp
+1619796185 source:e:\experiment\experiment4\graphex3\main.cpp
 	<iostream>
 	<cstdio>
 	<string>

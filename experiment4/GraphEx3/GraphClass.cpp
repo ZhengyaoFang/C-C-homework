@@ -21,6 +21,10 @@ Mgraph::Mgraph(int theVexnum,int theArcnum)
 
 
 //question1适用的构造函数
+
+
+
+
 Mgraph::Mgraph(int theVexnum,int theArcnum)
 {
     this->vexnum=theVexnum;
@@ -57,6 +61,8 @@ void Mgraph::AddNode(int start_idx,int end_idx,int weight,int road)
     AdjMatrix[end_idx][start_idx].val = weight;
     AdjMatrix[start_idx][end_idx].exist=true;
     AdjMatrix[end_idx][start_idx].exist=true;
+    AdjMatrix[end_idx][start_idx].Road=road;
+    AdjMatrix[start_idx][end_idx].Road=road;
     vertices[start_idx].degree++;
     vertices[end_idx].degree++;
     vertices[start_idx].Road.push_back(road);
@@ -135,7 +141,7 @@ int Mgraph::Dijkstra(int n1,int n2,int P[])
     }
     else if(ConnectedComponent!=1)//若图不连通
     {
-        //cerr<<"Error!The Graph is not connected!!"<<endl;     //为了符合输出要求，错误提示不输出
+        cerr<<"Error!The Graph is not connected!!"<<endl;     //为了符合输出要求，错误提示不输出
     }
     else if(n1>vexnum-1&&n2>vexnum-1)
     {
@@ -184,6 +190,8 @@ int Mgraph::Dijkstra(int n1,int n2,int P[])
     return -1;
 }
 
+
+//适用于问题一的Dijkstra形式
 void Mgraph::Dijkstra(int node1,int node2)
 {
     int distance,P[MAX_VER_NUM];
@@ -196,6 +204,7 @@ void Mgraph::Dijkstra(int node1,int node2)
     cout<<endl;
 }
 
+//适用于地图的Dijkstra算法找最短路
 void Mgraph::FindWay(string s1,string s2)
 {
     int node1,node2;
@@ -208,7 +217,7 @@ void Mgraph::FindWay(string s1,string s2)
     cout<<"需要最少时间："<<distance<<endl;
     PutOutStation(P,node1,node2);
 }
-//深度遍历
+//深度遍历，作为辅助函数求取连通分支的个数
 void Mgraph::DFS(int v,bool visited[])
 {
     visited[v]=true;
@@ -219,6 +228,7 @@ void Mgraph::DFS(int v,bool visited[])
     }
 }
 
+//初始化函数获得Floyed矩阵
 void Mgraph::GetFloyedMatrix()
 {
     if(ConnectedComponent!=1)
@@ -255,6 +265,7 @@ void Mgraph::GetFloyedMatrix()
     }
 }
 
+//初始化获得图的直径和半径
 void Mgraph::GetDiamesterAndRadius()
 {
     //得到结点的离心率
@@ -280,6 +291,7 @@ void Mgraph::GetDiamesterAndRadius()
     Radius=minecc;
 }
 
+//适用于问题一的格式话输出路径
 void Mgraph::PutOutWay(int P[],int v,int u)
 {
     if(v==u)
@@ -291,6 +303,8 @@ void Mgraph::PutOutWay(int P[],int v,int u)
     PutOutWay(P,v,P[u]);
     printf("%d ",u);
 }
+
+//适用于问题二的人性化输出站点
 void Mgraph::PutOutStation(int P[],int v,int u)
 {
     if(v==u)
@@ -301,17 +315,49 @@ void Mgraph::PutOutStation(int P[],int v,int u)
     PutOutStation(P,v,P[u]);
     cout<<"<=="<<vertices[u].name;
 }
-//暂时这样子，后面再改
-void Mgraph::GetData(int &node1,int &node2,int &theVal)
-{
-    cin>>node1;
-    cin>>node2;
-    cin>>theVal;
-}
 
+//暂时这样子，后面再改
+
+
+//问题二的输入站点名寻找其标号。
 int Mgraph::FindNodeNum(string s)
 {
     int i;
     while(!(s==vertices[i++].name));
     return --i;
+}
+
+
+bool GetData(std::fstream &fp,int &num1,int &num2)
+{
+    if(fp.eof())    return false;
+
+    GetOneData(fp,num1);
+    GetOneData(fp,num2);
+    return true;
+}
+
+bool GetData(std::fstream &fp,int &num1,int &num2,int &theVal)
+{
+    if(fp.eof())    return false;
+
+    GetOneData(fp,num1);
+    GetOneData(fp,num2);
+    GetOneData(fp,theVal);
+    return true;
+}
+
+bool GetOneData(fstream &fp,int &num)
+{
+    if(fp.eof())    return false;
+    fp>>num;
+    while(fp.fail()|| num<0)
+    {
+        cerr<<"Error!Please input the right number!"<<endl;
+        fp.clear();
+        fp.sync();
+        fp>>num;
+    }
+    return true;
+
 }
