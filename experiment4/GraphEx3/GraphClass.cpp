@@ -205,16 +205,18 @@ void Mgraph::Dijkstra(int node1,int node2)
 }
 
 //适用于地图的Dijkstra算法找最短路
-void Mgraph::FindWay(string s1,string s2)
+void Mgraph::FindWay(string &s1,string &s2)
 {
     int node1,node2;
+
     node1=FindNodeNum(s1);
-    cout<<node1<<endl;
     node2=FindNodeNum(s2);
     int P[MAX_VER_NUM];
     int distance;
     distance=Dijkstra(node1,node2,P);
     cout<<"需要最少时间："<<distance<<endl;
+    cout<<"地铁路线：";
+
     PutOutStation(P,node1,node2);
 }
 //深度遍历，作为辅助函数求取连通分支的个数
@@ -233,7 +235,8 @@ void Mgraph::GetFloyedMatrix()
 {
     if(ConnectedComponent!=1)
     {
-        cerr<<"Error!Can not get the FloyedMatrix for the Graph is not connected!"<<endl;
+        //依据格式不输出错误提示。
+        //cerr<<"Error!Can not get the FloyedMatrix for the Graph is not connected!"<<endl;
         return;
     }
     else
@@ -320,10 +323,20 @@ void Mgraph::PutOutStation(int P[],int v,int u)
 
 
 //问题二的输入站点名寻找其标号。
-int Mgraph::FindNodeNum(string s)
+int Mgraph::FindNodeNum(string &s)
 {
-    int i;
-    while(!(s==vertices[i++].name));
+    int i=0;
+
+
+    GetString(s);
+    while(!(s==vertices[i++].name)&&i<237);
+    while(i==237)
+    {
+        cout<<"无法查询到站点“"<<s<<"”，请重新输入！"<<endl;
+        i=0;
+        GetString(s);
+        while(!(s==vertices[i++].name)&&i<237);
+    }
     return --i;
 }
 
@@ -360,4 +373,17 @@ bool GetOneData(fstream &fp,int &num)
     }
     return true;
 
+}
+
+bool GetString(string &s)
+{
+    cin>>s;
+    while(cin.fail())
+    {
+        cerr<<"Error!Please input the right name!"<<endl;
+        cin.clear();
+        cin.sync();
+        cin>>s;
+    }
+    return true;
 }
