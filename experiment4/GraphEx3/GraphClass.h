@@ -11,11 +11,6 @@
 #define INFINITY1 999
 #define MAX_NAME 100
 
-//输入合法性检查，增强程序鲁棒性
-bool GetData(std::fstream &fp,int &num1,int &num2);
-bool GetData(std::fstream &fp,int &node1,int &node2,int &theVal);
-bool GetOneData(std::fstream &fp,int &num);
-bool GetString(std::string &s);
 
 
 
@@ -85,41 +80,32 @@ public:
 
 
     //成员函数
-    void Dijkstra(int n1,int n2);
-    int Dijkstra(int n1,int n2,int P[]);
-    void Init()
+    void Dijkstra(int n1,int n2);                           //无输出的Dijkstra核心算法
+    int Dijkstra(int n1,int n2,int P[]);                    //有格式输出的Dijkstra方法
+    void Init()                                             //图的初始化调用函数得到属性：
     {
-        GetConnectedComponent();
-        GetClusCoefficient();
-        GetFloyedMatrix();
-        GetDiamesterAndRadius();
+        GetConnectedComponent();                            //  连通分支个数
+        GetClusCoefficient();                               //  顶点和图的聚类系数
+        GetFloyedMatrix();                                  //  Floyed矩阵
+        GetDiamesterAndRadius();                            //  直径、半径
     }
-    void AddNode(int node1,int node2,int theVal,int road);
-    void FindWay(std::string &s1,std::string &s2);
-    int FindNodeNum(std::string &s);
 
-
-
-
+    void AddNode(int node1,int node2,int theVal,int road); //添加边、顶点
+    void FindWay(std::string &s1,std::string &s2);         //地铁图中有输出的寻找最短路径
+    int FindNodeNum(std::string &s);                       //根据输入名称寻找对应的地铁站顶点编号
 
 private:
 
-
     //成员函数
-    void GetClusCoefficient();
-    void GetConnectedComponent();
-    void DFS(int i,bool visited[MAX_VER_NUM]);//确定连通度
-    void GetFloyedMatrix();
-    void GetDiamesterAndRadius();
+    void GetClusCoefficient();                 //得到聚类系数
+    void GetConnectedComponent();              //得到连通分支数
+    void DFS(int i,bool visited[MAX_VER_NUM]);//深度优先遍历作为辅助函数确定连通度
+    void GetFloyedMatrix();                    //Floyed算法得到Floyed矩阵
+    void GetDiamesterAndRadius();              //根据Floyed矩阵得到图的直径、半径
+
+
     //辅助函数
-    void PutOutWay(int P[],int v,int u);
-    void PutOutStation(int P[],int v,int u);
-
-
-
-
+    void PutOutWay(int P[],int v,int u);       //问题一的递归输出路径
+    void PutOutStation(int P[],int v,int u);   //问题二的递归输出路径
 };
-
-
-
 #endif // GraphClass

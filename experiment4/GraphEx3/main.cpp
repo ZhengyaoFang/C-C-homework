@@ -4,6 +4,7 @@
 #include<sstream>
 #include<fstream>
 #include "GraphClass.h"
+#include "Robust.h"
 
 /**
 *问题执行的开关
@@ -167,18 +168,21 @@ int main() {
 
         //打印输出问题的相关信息
         //连通
-        cout<<(SubMap->ConnectedComponent==1)<<endl;
+        cout<<"是否连通："<<(SubMap->ConnectedComponent==1)<<endl;
 
         //最多换乘站点
         cout<<"最多换乘站点："<<SubMap->MaxConnectedStation<<"."<<SubMap->vertices[SubMap->MaxConnectedStation].name<<endl;
         cout<<"地铁图直径："<<SubMap->Diamester<<endl;
         cout<<"地铁图半径："<<SubMap->Radius<<endl;
 
+        cout<<endl;
 
         //输入站点名称查询最短路与中间乘经站
         string s1;
         string s2;
         cout<<"请输入您想查询站点的名称："<<endl;
+
+        cout<<endl;
         SubMap->FindWay(s1,s2);
 
         //释放空间

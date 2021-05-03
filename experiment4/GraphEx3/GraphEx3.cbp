@@ -34,6 +34,8 @@
 		</Compiler>
 		<Unit filename="GraphClass.cpp" />
 		<Unit filename="GraphClass.h" />
+		<Unit filename="Robust.cpp" />
+		<Unit filename="Robust.h" />
 		<Unit filename="main.cpp" />
 		<Extensions />
 	</Project>
