@@ -160,8 +160,6 @@ int FindPivot(int l,int r,int *start,int *_end)
     int p=_end[l],ps=start[l],pe=_end[l];
     while(l<r)
     {
-        Temp(_end[l],_end[r]);
-        Temp(start[l],start[r]);
         while(l<r&&_end[r]>=p)   r--;
         if(l<r)
         {
@@ -205,7 +203,7 @@ void findPeriod(int *start,int *_end,int M,int N)
             if(start[p_end]>m_start)    m_start=start[p_end];
         }
         time p;
-        p.start=start[m_start];
+        p.start=m_start;
         p._end=_end[p_end];
 
         int k=p_end;
@@ -214,6 +212,8 @@ void findPeriod(int *start,int *_end,int M,int N)
             if(start[k+1]<=_end[p_end])
             {
                 cou++;
+                if(start[k+1]>p.start)
+                    p.start=start[k+1];
             }
             k++;
         }
@@ -232,5 +232,6 @@ void findPeriod(int *start,int *_end,int M,int N)
     cout<<save[0].start<<" "<<save[0]._end;
     for(int i=1;i<save.size();i++)
         cout<<","<<save[i].start<<" "<<save[i]._end;
+    cout<<endl;
     return;
 }

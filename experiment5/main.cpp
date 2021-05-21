@@ -21,8 +21,6 @@ void test1(){
             scanf("%d", &a[i]);
         }
 
-  //      for(int i=0;i<n;i++)
-  //          cout<<a[i]<<endl;
 
         ans[case1] = FindMiddleMilk(n,a);
         printf("ans is:%d\n", ans[case1]);
@@ -49,9 +47,10 @@ void test2(){
         int *res;
 		res = Maxk(k,N,arr);
 		printf("==== Case %d ====\nres : ", case1 + 1);
-        for (i = 0; i < k; i++) {
+        for (i = k-1; i >=0; i--) {
             printf("%d ",res[i]);
         }
+        printf("\n");
     }
 	fclose(stdin);
 }
@@ -66,6 +65,7 @@ int main()
    int _end[1002];
 
    test1();
+   test2();
 
    if (freopen("5_3_input.in", "r", stdin) == NULL) {
 		printf("There is an error in reading file 5_3_input.in");
@@ -78,6 +78,7 @@ int main()
            scanf("%d %d",&start[i],&_end[i]);
        }
        Msort(start, _end, M);
+
        findPeriod(start, _end, M, N);
    }
    fclose(stdin);

@@ -10,7 +10,7 @@
 	<fstream>
 	<string>
 
-1621593129 source:e:\experiment\experiment5\main.cpp
+1621600734 source:e:\experiment\experiment5\main.cpp
 	<iostream>
 	<stdio.h>
 	<stdlib.h>
@@ -20,6 +20,6 @@
 	<iostream>
 	<vector>
 
-1621593163 source:e:\experiment\experiment5\sortfunc.cpp
+1621600975 source:e:\experiment\experiment5\sortfunc.cpp
 	"SortFunc.h"
 
