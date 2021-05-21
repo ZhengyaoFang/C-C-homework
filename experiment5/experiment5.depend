@@ -1,0 +1,25 @@
+# depslib dependency file v1.0
+1620058828 source:e:\experiment\experiment5\robust.cpp
+	<iostream>
+	<fstream>
+	<string>
+	"Robust.h"
+
+1620048269 e:\experiment\experiment5\robust.h
+	<iostream>
+	<fstream>
+	<string>
+
+1621593129 source:e:\experiment\experiment5\main.cpp
+	<iostream>
+	<stdio.h>
+	<stdlib.h>
+	"SortFunc.h"
+
+1621590357 e:\experiment\experiment5\sortfunc.h
+	<iostream>
+	<vector>
+
+1621593163 source:e:\experiment\experiment5\sortfunc.cpp
+	"SortFunc.h"
+
