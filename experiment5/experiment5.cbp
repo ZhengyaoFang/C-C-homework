@@ -32,6 +32,10 @@
 			<Add option="-Wall" />
 			<Add option="-fexceptions" />
 		</Compiler>
+		<Unit filename="Robust.cpp" />
+		<Unit filename="Robust.h" />
+		<Unit filename="SortFunc.cpp" />
+		<Unit filename="SortFunc.h" />
 		<Unit filename="main.cpp" />
 		<Extensions>
 			<lib_finder disable_auto="1" />
