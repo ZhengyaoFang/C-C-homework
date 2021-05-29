@@ -27,6 +27,7 @@ void test1(){
         printf("\n");
     }
     fclose(stdin);
+    printf("\n");
 }
 
 void test2(){
@@ -50,9 +51,10 @@ void test2(){
         for (i = k-1; i >=0; i--) {
             printf("%d ",res[i]);
         }
-        printf("\n");
+        printf("\n\n");
     }
 	fclose(stdin);
+	printf("\n");
 }
 
 
@@ -80,6 +82,7 @@ int main()
        Msort(start, _end, M);
 
        findPeriod(start, _end, M, N);
+       printf("\n");
    }
    fclose(stdin);
 }
